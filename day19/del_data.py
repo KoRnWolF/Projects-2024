@@ -1,0 +1,30 @@
+#
+# tim = Turtle()
+# tim.color("red")
+# tim.speed("slow")
+# tim.penup()
+# tim.setpos(-225,0)
+#
+# tom = Turtle()
+# tom.color("blue")
+# tom.speed("slow")
+# tom.penup()
+# tom.setpos(-225,40)
+#
+# top = Turtle()
+# top.color("green")
+# top.speed("slow")
+# top.penup()
+# top.setpos(-225,80)
+#
+# tol = Turtle()
+# tol.color("purple")
+# tol.speed("slow")
+# tol.penup()
+# tol.setpos(-225,-40)
+#
+# tix = Turtle()
+# tix.color("orange")
+# tix.speed("slow")
+# tix.penup()
+# tix.setpos(-225,-80)
