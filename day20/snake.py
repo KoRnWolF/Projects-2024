@@ -7,6 +7,7 @@ class Snake:
 
         self.segments = []
         self.create_snake()
+        self.last_segment_num = len(self.segments) - 1
 
     def create_snake(self):
 
@@ -40,3 +41,16 @@ class Snake:
     def right(self):
         if self.segments[0].heading() != 180:
             self.segments[0].setheading(0)
+
+    def add_segments(self):
+        """Rough code to add segments"""
+        last_segment = self.segments[self.last_segment_num]
+        last_segment_pos = last_segment.pos()
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(last_segment_pos)
+        self.segments.append(new_segment)
+
+
+
