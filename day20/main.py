@@ -21,7 +21,7 @@ screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
 scoreboard.wall()
-
+#main loop
 game_run = True
 while game_run:
     screen.update()
