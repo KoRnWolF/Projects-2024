@@ -7,19 +7,26 @@ class Snake:
 
         self.segments = []
         self.create_snake()
-        self.last_segment_num = len(self.segments) - 1
 
     def create_snake(self):
 
         for position in STARTING_POS:
-            new_segment = Turtle("square")
-            new_segment.color("white")
-            new_segment.penup()
-            new_segment.goto(position)
-            self.segments.append(new_segment)
+            self.add_segments(position)
+
+    def add_segments(self, position):
+        """method add segments"""
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend_snake(self):
+        """method extend tail"""
+        self.add_segments(self.segments[-1].position())
 
     def move(self):
-        """moves the snake segments, from last to next and then next"""
+        """ method moves the snake segments, from last to next and then next"""
         for seg_idx in range(len(self.segments) - 1, 0, -1):
             new_x = self.segments[seg_idx - 1].xcor()
             new_y = self.segments[seg_idx - 1].ycor()
@@ -42,15 +49,7 @@ class Snake:
         if self.segments[0].heading() != 180:
             self.segments[0].setheading(0)
 
-    def add_segments(self):
-        """Rough code to add segments"""
-        last_segment = self.segments[self.last_segment_num]
-        last_segment_pos = last_segment.pos()
-        new_segment = Turtle("square")
-        new_segment.color("white")
-        new_segment.penup()
-        new_segment.goto(last_segment_pos)
-        self.segments.append(new_segment)
+
 
 
 
