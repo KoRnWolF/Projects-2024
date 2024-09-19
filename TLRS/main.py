@@ -27,9 +27,7 @@ def submit():
         text_widget.insert(tk.END, sys_name + '\n')
         worksheet.write(row, column, sys_name)
         row += 1
-    server_name = its_code.upper() + "SRV" + "001" + "@retail.spar.co.za"
-    text_widget.insert(tk.END, server_name + '\n')
-    worksheet.write(row, column, server_name)
+
 
     its_code_var.set("")
     ws_amt_var.set("")
