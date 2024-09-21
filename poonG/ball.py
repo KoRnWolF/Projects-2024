@@ -5,15 +5,18 @@ class Ball(Turtle):
     def __init__(self):
         super().__init__()
         self.shape("circle")
+        self.color("white")
         self.penup()
-        self.goto(0,0)
-        self.setheading(0)
+        self.x_move = 10
+        self.y_move = 10
 
     def move(self):
-        self.forward(20)
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
+        self.goto(new_x, new_y)
 
-    def change_heading(self):
-        random_numb = r.randrange(-10,10)
-        new_heading = 180 - random_numb
-        self.setheading(self.heading()-new_heading)
-        print(self.heading())
+    def bounce_paddle(self):
+        self.x_move *= -1
+
+    def bounce(self):
+        self.y_move *= -1

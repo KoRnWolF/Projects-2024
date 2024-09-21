@@ -1,32 +1,27 @@
 import turtle
 from turtle import Turtle
 
-class Player:
-
-    def __init__(self):
-        self.players = []
-        self.starting_loc = [(-450, 0), (450, 0)]
-        self.create_player()
-
-    def create_player(self):
-        for position in self.starting_loc:
-            player = Turtle("square")
-            player.speed("fastest")
-            player.penup()
-            player.goto(position)
-            player.setheading(90)
-            player.resizemode("user")
-            player.shapesize(1,5,1)
-            self.players.append(player)
-
+class Player(Turtle):
+    def __init__(self, position):
+        super().__init__()
+        self.shape("square")
+        self.color("white")
+        self.penup()
+        self.goto(position)
+        self.resizemode("user")
+        self.shapesize(5, 1)
     def up_player_1(self):
-        self.players[0].forward(20)
+        new_y = self.ycor() + 20
+        self.goto(self.xcor(), new_y)
 
     def down_player_1(self):
-        self.players[0].backward(20)
+        new_y = self.ycor() - 20
+        self.goto(self.xcor(), new_y)
 
     def up_player_2(self):
-        self.players[1].forward(20)
+        new_y = self.ycor() + 20
+        self.goto(self.xcor(), new_y)
 
     def down_player_2(self):
-            self.players[1].backward(20)
+        new_y = self.ycor() - 20
+        self.goto(self.xcor(), new_y)
