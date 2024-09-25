@@ -29,6 +29,7 @@ max_speed = 7.9
 
 while run:
     for turt in turts:
+        print(turt)
         if turt.xcor() > 407:
             run = False
             winner = turt.pencolor()
