@@ -1,6 +1,7 @@
 from turtle import Turtle
+from scoreboard import ScoreBoard
 import random
-CAR_SPEED = 8
+from player import Player
 
 class CarManager:
     def __init__(self):
@@ -20,9 +21,9 @@ class CarManager:
         self.cars.append(car)
 
 
-    def car_move(self):
+    def car_move(self, car_speed):
         for car in self.cars:
-            car.forward(CAR_SPEED)
+            car.forward(car_speed)
             if car.xcor() <= -300:
                 car.hideturtle()
                 self.cars.remove(car)

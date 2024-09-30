@@ -1,7 +1,7 @@
 from turtle import Turtle
 POSITION = (0,-280)
 MOVE_SPEED = 20
-FINISH_LINE = 280
+
 class Player(Turtle):
     def __init__(self):
         super().__init__()
@@ -16,7 +16,5 @@ class Player(Turtle):
         new_y = self.ycor() + MOVE_SPEED
         self.goto(self.xcor(), new_y)
 
-    def check_finish(self):
-        if self.ycor() >= FINISH_LINE:
-            self.goto(POSITION)
+
 
