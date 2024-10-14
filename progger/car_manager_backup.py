@@ -1,5 +1,6 @@
 import turtle
 from turtle import Turtle
+from scoreboard import ScoreBoard
 import random
 from scoreboard import Scoreboard
 

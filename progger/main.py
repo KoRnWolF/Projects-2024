@@ -5,6 +5,8 @@ from car_manager_backup import CarManager
 from scoreboard import Scoreboard
 
 screen = Screen()
+car_speed = 8
+scoreboard = ScoreBoard()
 
 screen.setup(600,600)
 screen.tracer(0)
@@ -12,7 +14,6 @@ screen.bgcolor("white")
 
 player = Player()
 car_manager_backup = CarManager()
-
 
 screen.listen()
 screen.onkeypress(player.player_move, "Up")
