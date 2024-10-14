@@ -1,3 +1,4 @@
+import turtle
 from turtle import Turtle
 
 STARTING_POS = [(0, 0), (-20, 0), (-40, 0)]
@@ -13,6 +14,7 @@ class Snake:
         for position in STARTING_POS:
             self.add_segments(position)
 
+
     def add_segments(self, position):
         """method add segments"""
         new_segment = Turtle("square")
@@ -24,6 +26,12 @@ class Snake:
     def extend_snake(self):
         """method extend tail"""
         self.add_segments(self.segments[-1].position())
+
+    def reset(self):
+        for seg in self.segments:
+            seg.hideturtle()
+        self.segments.clear()
+        self.create_snake()
 
     def move(self):
         """ method moves the snake segments, from last to next and then next"""

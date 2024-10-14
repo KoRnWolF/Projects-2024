@@ -20,7 +20,7 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
-scoreboard.wall()
+
 #main loop
 game_run = True
 while game_run:
@@ -37,16 +37,18 @@ while game_run:
         snake.extend_snake()
     #check wall collision
     if snake.segments[0].xcor() >= 285 or snake.segments[0].xcor() <= -285:
-        scoreboard.end_game()
-        game_run = False
+        scoreboard.reset()
+        snake.reset()
     if snake.segments[0].ycor() >= 285 or snake.segments[0].ycor() <= -285:
-        scoreboard.end_game()
-        game_run = False
-    sliced = snake.segments[1:]
+        scoreboard.reset()
+        snake.reset()
     #tail collision check
     for segment in snake.segments[1:]:
         if snake.segments[0].distance(segment) <= 0.1:
-            game_run = False
-            scoreboard.end_game()
+            scoreboard.reset()
+            snake.reset()
+    with open("high_score.txt", "w") as file:
+
+        file.write(str(scoreboard.high_score))
 
 screen.exitonclick()
