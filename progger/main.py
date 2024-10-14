@@ -6,7 +6,7 @@ from scoreboard import Scoreboard
 
 screen = Screen()
 car_speed = 8
-scoreboard = ScoreBoard()
+scoreboard = Scoreboard()
 
 screen.setup(600,600)
 screen.tracer(0)
@@ -17,7 +17,7 @@ car_manager_backup = CarManager()
 
 screen.listen()
 screen.onkeypress(player.player_move, "Up")
-scoreboard = Scoreboard()
+
 
 x = 0
 game_on = True
@@ -33,7 +33,7 @@ while game_on:
     x += 1
 
     for car in car_manager_backup.cars:
-        if car.distance(player) < 20:
+        if car.distance(player) < 15:
             game_on = False
             scoreboard.game_over_check()
 

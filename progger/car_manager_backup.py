@@ -1,8 +1,7 @@
 import turtle
 from turtle import Turtle
-from scoreboard import ScoreBoard
 import random
-from scoreboard import Scoreboard
+
 
 color_list = [(246, 245, 243), (233, 239, 246), (246, 239, 242), (240, 246, 243), (132, 166, 205), (221, 148, 106),
               (32, 42, 61), (199, 135, 148), (166, 58, 48), (141, 184, 162), (39, 105, 157), (237, 212, 90),
