@@ -47,8 +47,5 @@ while game_run:
         if snake.segments[0].distance(segment) <= 0.1:
             scoreboard.reset()
             snake.reset()
-    with open("high_score.txt", "w") as file:
-
-        file.write(str(scoreboard.high_score))
 
 screen.exitonclick()
