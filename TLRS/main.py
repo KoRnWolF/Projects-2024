@@ -40,6 +40,11 @@ def clear_txt():
     text_widget.config(state=tk.NORMAL)
     text_widget.delete("1.0", "end")
 
+def copy_text():
+    root.clipboard_clear()
+    text_widget.focus()
+    root.clipboard_append(text_widget.get('1.0', 'end'))
+
 its_code_label = tk.Label(root, text = 'ITSCODE:', font=('calibre', 10, 'bold'))
 its_code_entry = tk.Entry(root, textvariable= its_code_var, font=('calibre', 10, 'normal'))
 
@@ -52,6 +57,8 @@ sub_btn = tk.Button(root,text = 'Submit', command = submit)
 quit_btn = tk.Button(root,text = 'Quit', command = quit_prg)
 clear_btn = tk.Button(root,text = 'Clear', command = clear_txt)
 
+copy_btn = tk.Button(root,text = 'Copy', command = copy_text)
+
 its_code_label.grid(row = 0, column = 0, padx = 40)
 its_code_entry.grid(row = 0, column = 1)
 
@@ -63,6 +70,7 @@ notice_label.grid(row = 3, column = 0, padx = 20)
 sub_btn.grid(row = 2, column = 1, pady = 20)
 quit_btn.grid(row = 2, column = 0, pady = 20)
 clear_btn.grid(row = 2, column = 2, pady = 20)
+copy_btn.grid(row = 3, column = 2, pady = 20)
 
 text_widget.grid(row = 3, column = 1, pady = 40)
 root.bind("<Return>", key_pressed)
