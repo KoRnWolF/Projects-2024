@@ -13,6 +13,8 @@ scorer = turtle.Turtle()
 
 states = pandas.read_csv("50_states.csv")
 state_df = pandas.DataFrame(states)
+all_states = states.state.to_list()
+
 cont = True
 score = 0
 answers = []
@@ -36,6 +38,10 @@ while cont:
         # print("Wrong")
         #
         # pass
+
+    if state_answer == "Exit":
+        break
+
     else:
         if state_answer not in answers:
             location_state = location.values[0][0]
@@ -46,14 +52,20 @@ while cont:
             t.speed("fastest")
             t.setposition(location_x, location_y)
             t.write(location_state)
+
             score += 1
             answers.append(state_answer)
+            
             scorer.speed("fastest")
             scorer.clear()
             scorer.hideturtle()
             scorer.penup()
             scorer.setposition(-150, 340)
             scorer.write(f"Current score:{score}/50",font=("Arial", 20, "normal"))
+            all_states.remove(state_answer)
+
+df = pandas.DataFrame(all_states, columns=["Missed States"])
+df.to_csv("states_to_learn.csv", index=False)
 
 #code to get coords on click
 # def mouse_coord(x, y):
@@ -62,5 +74,3 @@ while cont:
 # turtle.onscreenclick(mouse_coord)
 #
 # screen.mainloop()
-
-screen.exitonclick()
