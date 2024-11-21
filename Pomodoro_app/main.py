@@ -15,20 +15,15 @@ def reset_timer():
     pass
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
-    # canvas.delete(counter_text)
-    canvas.create_text(100, 130, text="25:00", fill="white", font=(FONT_NAME, 35, "bold"))
-    final_countdown()
+    final_countdown(WORK_MIN)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def final_countdown(workmin=25):
-    mins, secs = divmod(workmin, 60)
-    print(workmin)
-    print(mins)
+def final_countdown(workmin):
+    mins, secs = divmod(workmin, 5)
+    canvas.delete("counter")
     canvas.itemconfig(counter_text, text=workmin)
     if workmin > 0:
-        canvas.after(1000, final_countdown, workmin - 1)
-    print(workmin)
-
+        window.after(1000, final_countdown, workmin - 1)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -42,6 +37,7 @@ counter_text = canvas.create_text(100,130, text="00:00", fill = "white", font=(F
 
 start_button = Button(text="START", bg="green", fg="white" , command=start_timer)
 start_button.grid(column = 0, row = 2)
+
 
 reset_button = Button(text="RESET", bg="green", fg="white", command=reset_timer)
 reset_button.grid(column = 2, row = 2)
