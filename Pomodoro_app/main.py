@@ -1,5 +1,5 @@
 from tkinter import *
-
+import math
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#c62e2e"
@@ -15,15 +15,17 @@ def reset_timer():
     pass
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
-    final_countdown(WORK_MIN)
+    final_countdown(WORK_MIN * 60)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def final_countdown(workmin):
-    mins, secs = divmod(workmin, 5)
+def final_countdown(count):
+    count_min = math.floor(count / 60)
+    count_sec = count % 60
+    mins, secs = divmod(count, 60)
     canvas.delete("counter")
-    canvas.itemconfig(counter_text, text=workmin)
-    if workmin > 0:
-        window.after(1000, final_countdown, workmin - 1)
+    canvas.itemconfig(counter_text, text=f"{count_min}:{count_sec}")
+    if count > 0:
+        window.after(1000, final_countdown, count - 1)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -37,7 +39,6 @@ counter_text = canvas.create_text(100,130, text="00:00", fill = "white", font=(F
 
 start_button = Button(text="START", bg="green", fg="white" , command=start_timer)
 start_button.grid(column = 0, row = 2)
-
 
 reset_button = Button(text="RESET", bg="green", fg="white", command=reset_timer)
 reset_button.grid(column = 2, row = 2)
