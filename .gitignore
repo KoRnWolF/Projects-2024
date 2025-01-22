@@ -44,3 +44,8 @@ Pomodoro_app/.idea/misc.xml
 Pomodoro_app/.idea/modules.xml
 Pomodoro_app/.idea/Pomodoro_app.iml
 Pomodoro_app/.idea/vcs.xml
+.idea/.name
+/.idea/inspectionProfiles
+*.xml
+*.iml
+myPass/password-manager-start.zip
