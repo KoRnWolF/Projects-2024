@@ -30,7 +30,7 @@ def gen_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
 
-    website = web_entry.get()
+    website = web_entry.get().capitalize()
     email = email_entry.get()
     password = pass_entry.get()
     new_data = {
@@ -49,21 +49,55 @@ def save_password():
                                                                             f"Email : {email}\n"
                                                                             f"Password : {password}")
         if confirm_save:
-            with open("password_file.json", "r") as pass_file:
-                #Read old data - from json to python dict
-                data = json.load(pass_file)
-                #Update old data with new data - normal python dict
-                data.update(new_data)
+            try:#check if json exists
 
-            with open("password_file.json", "w") as pass_file:
-                json.dump(data, pass_file, indent=4)
+                open("password_file.json", "r")
 
+            except FileNotFoundError:#create json if it does not
+                open("password_file.json", "w")
+
+            try:#open json in read mode
+                with open("password_file.json", "r") as pass_file:
+                    # Read old data - from json to python dict
+                    data = json.load(pass_file)
+                    # Update old data with new data - normal python dict
+                    data.update(new_data)
+
+            except ValueError:#if json is empty dump new_data(Initial) in json
+                with open("password_file.json", "w") as pass_file:
+
+                    json.dump(new_data, pass_file, indent=4)
+
+            else:#dump updated data in json
+                with open("password_file.json", "w") as pass_file:
+
+                    json.dump(data, pass_file, indent=4)
+            finally:
                 pass_file.close()
-                pyperclip.copy(password)#Copy password to clipboard
+                pyperclip.copy(password)  # Copy password to clipboard
+                web_entry.delete(0, END)
+                pass_entry.delete(0, END)
+                web_entry.focus()
 
-            web_entry.delete(0, END)
-            pass_entry.delete(0, END)
-            web_entry.focus()
+# ---------------------------- SAVE PASSWORD ------------------------------- #
+def find_password():
+    website = web_entry.get().capitalize()
+    try:
+        with open("password_file.json", "r") as pass_file:
+            try:
+                # Read old data - from json to python dict
+                data = json.load(pass_file)
+                data.get(website)
+
+                messagebox.showinfo(title= f"{website}", message = f"Email:{data[website]['email']}\n" 
+                                                                f"Password:{data[website]['password']}")
+                pyperclip.copy(data[website]['password'])
+            except KeyError:
+                messagebox.showerror(title="Website not found", message="Details for this website not found")
+
+    except FileNotFoundError:
+        messagebox.showerror(title="No data found", message="No Data file found")
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -71,9 +105,9 @@ window = Tk()
 window.title("myP4ss")
 window.config(padx=50, pady=50)
 #Canvas
-canvas = Canvas(width=200, height=200)
-lock_img = PhotoImage(file="logo.png")
-canvas.create_image(100, 100, image=lock_img)
+canvas = Canvas(width=250, height=280)
+lock_img = PhotoImage(file="lock.png")
+canvas.create_image(140, 150, image=lock_img)
 canvas.grid(column = 1, row = 0)
 #Labels
 web_label = Label(text="Website:")
@@ -83,20 +117,20 @@ Email_label.grid(column=0, row=2)
 pass_label = Label(text="Password:")
 pass_label.grid(column=0, row=3)
 #Entries
-web_entry = Entry(width=35)
-web_entry.grid(column = 1, row = 1, columnspan = 2)
+web_entry = Entry(width=30)
+web_entry.grid(column = 1, row = 1)
 web_entry.focus()
-email_entry = Entry(width=35)
-email_entry.grid(column = 1, row = 2, columnspan = 2)
+email_entry = Entry(width=30)
+email_entry.grid(column = 1, row = 2)
 email_entry.insert(0, "@gmail.com")
-pass_entry = Entry(width=22)
+pass_entry = Entry(width=30)
 pass_entry.grid(column = 1, row = 3)
 #Buttons
+search_btn = Button(text="Search", width=10, command=find_password)
+search_btn.grid(column = 2, row = 1)
 gen_pass = Button(text="Generate Password", command=gen_password)
-gen_pass.grid(column = 1, row = 4)
+gen_pass.grid(column = 2, row = 3)
 add_profile = Button(text="Add", width = 10, command=save_password)
 add_profile.grid(column = 1, row = 5)
-
-
 
 window.mainloop()
