@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import pyperclip
+import json
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def gen_password():
@@ -32,6 +33,12 @@ def save_password():
     website = web_entry.get()
     email = email_entry.get()
     password = pass_entry.get()
+    new_data = {
+        website:{
+            "email":email,
+            "password":password
+        }
+    }
     #Check if any entries are empty
     if len(website) == 0 or len(password) == 0:
         empty_error = messagebox.showerror(title = "Empty Fields Error", message="Please do not leave any fields empty!")
@@ -42,10 +49,17 @@ def save_password():
                                                                             f"Email : {email}\n"
                                                                             f"Password : {password}")
         if confirm_save:
-            pass_file = open("password_file.txt", "a")
-            pass_file.write(f"{website},{email},{password}\n" )
-            pass_file.close()
-            pyperclip.copy(password)#Copy password to clipboard
+            with open("password_file.json", "r") as pass_file:
+                #Read old data - from json to python dict
+                data = json.load(pass_file)
+                #Update old data with new data - normal python dict
+                data.update(new_data)
+
+            with open("password_file.json", "w") as pass_file:
+                json.dump(data, pass_file, indent=4)
+
+                pass_file.close()
+                pyperclip.copy(password)#Copy password to clipboard
 
             web_entry.delete(0, END)
             pass_entry.delete(0, END)
@@ -82,5 +96,7 @@ gen_pass = Button(text="Generate Password", command=gen_password)
 gen_pass.grid(column = 1, row = 4)
 add_profile = Button(text="Add", width = 10, command=save_password)
 add_profile.grid(column = 1, row = 5)
+
+
 
 window.mainloop()
