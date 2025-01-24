@@ -49,3 +49,5 @@ Pomodoro_app/.idea/vcs.xml
 *.xml
 *.iml
 myPass/password-manager-start.zip
+myPass/password_file.json
+myPass/password_file.txt
