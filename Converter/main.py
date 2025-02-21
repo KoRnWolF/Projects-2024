@@ -1,4 +1,23 @@
 import tkinter
+import smtplib
+
+def send_email(subject, body):
+    sender_email = "mailerautomailer@gmail.com"
+    sender_password = "cdlo zsww jkgy adie"
+    recipient_email = "henno.steyn@trade-link.co.za"
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.ehlo()
+            server.starttls()
+            server.login(sender_email, sender_password)
+            email_message = f"Subject: {subject}\n\n{body}"
+            server.sendmail(sender_email, recipient_email, email_message)
+            server.quit()
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+
 
 window = tkinter.Tk()
 window.title("Converter")
@@ -32,7 +51,7 @@ km_label.grid(column = 2, row = 1)
 result = tkinter.Label(text="0")
 result.grid(column=1, row=1)
 
-calculate_button = tkinter.Button(text="Calculate", command = calculate)
+calculate_button = tkinter.Button(text="Calculate", command = send_email("Hello", "This is working"))
 calculate_button.grid(column = 1, row = 2)
 
 
